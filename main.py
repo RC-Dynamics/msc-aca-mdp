@@ -2,6 +2,7 @@ import numpy as np
 
 width = 4
 height = 3
+r_s = [-0.4, -0.04, -0.004]
 
 def create_spec_pos():
     spec_pos = []
@@ -18,5 +19,6 @@ def create_world(h, w, spc_pos):
     return w
 
 if __name__ == "__main__":
-    world = create_world(3, 4, create_spec_pos())
+    spec_pos = create_spec_pos()
+    world = create_world(height, width, spec_pos)
     print(world)
