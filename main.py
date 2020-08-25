@@ -218,7 +218,8 @@ def return_policy(T_up,T_down,T_right,T_left,value):
     s2 = [actions[policy[1]],actions[policy[4]],actions[policy[7]],"-1"]
     s3 = [actions[policy[0]],actions[policy[3]],actions[policy[6]],actions[policy[9]]]
 
-    print("\n",s1,"\n",s2,"\n",s3)
+    print("\n",s1,"\n",s2,"\n",s3, "\n")
+
 
 
     return(policy)
