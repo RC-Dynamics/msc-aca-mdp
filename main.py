@@ -179,13 +179,12 @@ def update_value(T_up,T_down,T_right,T_left,rw,value, i):
     
     for s in range(12):
 
-        v_up = T_up[s,] * value.transpose()   
+        v_up = T_up[s,] * value.transpose()
         v_down = T_down[s,] * value.transpose()
         v_left = T_left[s,] * value.transpose()
         v_right = T_right[s,] * value.transpose()
 
-        value_aux[s] = rw[s] + np.max(np.concatenate((v_up,v_down,v_left,v_right)))
-
+        value_aux[s] = rw[s] + np.max((np.sum(v_up),np.sum(v_down),np.sum(v_left),np.sum(v_right)))
 
     value = value_aux
 
