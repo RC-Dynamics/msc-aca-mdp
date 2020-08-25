@@ -2,10 +2,12 @@ import numpy as np
 
 width = 4
 height = 3
-r_s = [-0.4, -0.04, -0.004]
 
-rw = np.full((12, ), -0.04)
-# rw[4] = -0.5
+max_iterations = 100
+epsilon = 0.01
+
+rw = np.full((12, ), -0.4)
+rw[4] = -0.5
 # rw[9] = 0.2
 rw[10] = -1.0
 rw[11] = 1.0
@@ -225,8 +227,14 @@ def return_policy(T_up,T_down,T_right,T_left,value):
 if __name__ == "__main__":
     value = np.zeros(12)
 
-    for i in range(5):
+    for i in range(max_iterations):
+        old_value = value
         value = update_value(T_up, T_down, T_right, T_left, rw, value, i)
+        diff = np.sum(value - old_value)
+        if abs(diff) < epsilon:
+            print("Converged!")
+            break
+
 
     policy = return_policy(T_up,T_down,T_right,T_left,value)
  
