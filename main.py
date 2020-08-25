@@ -4,9 +4,9 @@ width = 4
 height = 3
 r_s = [-0.4, -0.04, -0.004]
 
-rw = np.full((12, ), -0.4)
-rw[4] = -0.5
-rw[9] = 0.2
+rw = np.full((12, ), -0.04)
+# rw[4] = -0.5
+# rw[9] = 0.2
 rw[10] = -1.0
 rw[11] = 1.0
 
@@ -208,7 +208,7 @@ def return_policy(T_up,T_down,T_right,T_left,value):
         v_left = T_left[s,] * value.transpose()
         v_right = T_right[s,] * value.transpose()
         
-        policy.append(np.argmax(np.array((v_up[s],v_down[s],v_left[s],v_right[s]))))
+        policy.append(np.argmax(np.array((np.sum(v_up),np.sum(v_down),np.sum(v_left),np.sum(v_right)))))
     
     actions = ["UP","DW","LF","RG"]
 
@@ -225,7 +225,7 @@ def return_policy(T_up,T_down,T_right,T_left,value):
 if __name__ == "__main__":
     value = np.zeros(12)
 
-    for i in range(100):
+    for i in range(5):
         value = update_value(T_up, T_down, T_right, T_left, rw, value, i)
 
     policy = return_policy(T_up,T_down,T_right,T_left,value)
